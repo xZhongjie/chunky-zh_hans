@@ -107,7 +107,7 @@ public class LightingTab extends ScrollPane implements RenderControlsTab, Initia
     enableEmitters.selectedProperty().addListener(
       (observable, oldValue, newValue) -> scene.setEmittersEnabled(newValue));
 
-    emitterIntensity.setName("Emitter intensity");
+    emitterIntensity.setName("原神启动");
     emitterIntensity.setTooltip("Modifies the intensity of emitter light.");
     emitterIntensity.setRange(Scene.MIN_EMITTER_INTENSITY, Scene.MAX_EMITTER_INTENSITY);
     emitterIntensity.makeLogarithmic();
