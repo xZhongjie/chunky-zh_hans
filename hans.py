@@ -1,15 +1,24 @@
 import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-script_dir = os.path.dirname(os.path.abspath(__file__))
+def load_replacements_from_header(header_path):
+    file_specific_replacements = {}
+    current_file = None
+    with open(header_path, 'r', encoding='utf-8') as header:
+        for line in header:
+            stripped_line = line.strip()
+            if stripped_line.startswith('<') and stripped_line.endswith('>'):
+                current_file = os.path.abspath(stripped_line[1:-1])
+                file_specific_replacements[current_file] = {}
+            elif current_file and ',' in stripped_line:
+                original, translation = stripped_line.split(',', 1)
+                file_specific_replacements[current_file][original.strip()] = translation.strip()
+    return file_specific_replacements
 
-#在此修改
-file_specific_replacements = {
-    os.path.join(script_dir, r'.\chunky\src\java\se\llbit\chunky\ui\render\tabs\LightingTab.java'): {
-        "Emitter intensity": "测试用例",
-        "Modifies the intensity of emitter light.": "测试用例2"
-    },
-}
+script_dir = os.path.dirname(os.path.abspath(__file__))
+header_file_path = os.path.join(script_dir, "replacements.h") 
+
+file_specific_replacements = load_replacements_from_header(header_file_path)
 
 def apply_replacements(file_path, replacements):
     if not os.path.isfile(file_path):
