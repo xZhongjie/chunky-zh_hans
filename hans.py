@@ -16,7 +16,7 @@ def load_replacements_from_header(header_path):
     return file_specific_replacements
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
-header_file_path = os.path.join(script_dir, "replacements.h") 
+header_file_path = os.path.join(script_dir, "replacements.txt") 
 
 file_specific_replacements = load_replacements_from_header(header_file_path)
 
