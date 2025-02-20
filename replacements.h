@@ -1,4 +1,4 @@
-<./chunky/src/java/se/llbit/chunky/ui/render/tabs/LightingTab.java>|
+<./chunky/src/java/se/llbit/chunky/ui/render/tabs/LightingTab.java>
 Sky exposure|天空曝光
 Changes the exposure of the sky.|改变天空的曝光度。
 Sky light intensity modifier|天空光照强度调节
@@ -24,7 +24,7 @@ Apparent sun brightness|太阳表观亮度
 Changes the apparent brightness of the sun texture.|改变太阳材质的表观亮度。
 Sun size|太阳大小
 Sun radius in degrees.|太阳半径（以度为单位）。
-Changes whether the the color of the sun texture is modified by the apparent sun color.|控制太阳材质的颜色是否受太阳表观颜色的影响。
+hanges whether the the color of the sun texture is modified by the apparent sun color.|控制太阳材质的颜色是否受太阳表观颜色的影响。
 Sun azimuth|太阳方位角
 Changes the horizontal direction of the sun from a reference direction of East.|改变太阳相对于以东部作为参考方向时的水平方向。
 Sun altitude|太阳高度
