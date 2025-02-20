@@ -10,8 +10,8 @@ def load_replacements_from_header(header_path):
             if stripped_line.startswith('<') and stripped_line.endswith('>'):
                 current_file = os.path.abspath(stripped_line[1:-1])
                 file_specific_replacements[current_file] = {}
-            elif current_file and ',' in stripped_line:
-                original, translation = stripped_line.split(',', 1)
+            elif current_file and '|' in stripped_line:
+                original, translation = stripped_line.split('|', 1)
                 file_specific_replacements[current_file][original.strip()] = translation.strip()
     return file_specific_replacements
 
