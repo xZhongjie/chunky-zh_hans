@@ -1,31 +1,69 @@
 <./chunky/src/java/se/llbit/chunky/ui/render/tabs/LightingTab.java>
-Sky exposure|天空曝光
-Changes the exposure of the sky.|改变天空的曝光度。
-Sky light intensity modifier|天空亮度（影响环境光照）
-Modifies the intensity of the light emitted by the sky.|修改天空发出的光的强度，影响地面。
-Apparent sky brightness modifier|天空亮度乘数（仅显示）
-Modifies the apparent brightness of the sky.|修改天空的表观亮度，不对地面产生影响。
-Allow blocks to emit light based on their material settings.|允许基于材质设置的方块发光。
-Emitter intensity|发射器（光源）强度
-Modifies the intensity of emitter light.|修改发射器发出的光的强度。
-Reload chunks|重载区块
-Chunk reload required|需要重载区块
-Determine how emitters are sampled at each bounce.|决定每次反射时如何对发射器进行采样。
-Draws the sun texture on top of the skymap.|在skymap上绘制太阳材质。
-Importance sample chance|重要性采样概率
-Probability of sampling the sun on each importance bounce|在每次重要性反射中采样太阳的概率。
-Importance sample radius|重要性采样半径
-Radius of possible sun sampling bounces (relative to the sun's radius)|太阳可能采样反射半径（相对于太阳的半径）。
-Sunlight intensity|阳光强度（FAST）
-Changes the intensity of sunlight. Only used when Sun Sampling Strategy is set to FAST or HIGH_QUALITY.|改变阳光的强度。仅在太阳采样策略设置为FAST或HIGH_QUALITY时使用。
-Sun luminosity|阳光强度（OFF）
-Changes the absolute brightness of the sun. Only used when Sun Sampling Strategy is set to OFF or HIGH_QUALITY.|改变太阳的绝对亮度。仅在太阳采样策略设置为OFF或HIGH_QUALITY时使用。
-Apparent sun brightness|太阳表观亮度（仅显示）
-Changes the apparent brightness of the sun texture.|改变太阳材质的表观亮度。
-Sun size|太阳大小
-Sun radius in degrees.|太阳半径（以度为单位）。
-Changes whether the the color of the sun texture is modified by the apparent sun color.|控制太阳材质的颜色是否受太阳表观颜色的影响。
-Sun azimuth|太阳方位角
-Changes the horizontal direction of the sun from a reference direction of East.|改变太阳相对于以东部作为参考方向时的水平方向。
-Sun altitude|太阳高度
-Changes the vertical direction of the sun from a reference altitude of the horizon.|改变太阳相对于以地平线作为参考高度时的垂直方向。
+"Sky exposure"|"天空曝光"
+"Changes the exposure of the sky."|"改变天空的曝光度。"
+"Sky light intensity modifier"|"天空亮度（影响环境光照）"
+"Modifies the intensity of the light emitted by the sky."|"修改天空发出的光的强度，影响地面。"
+"Apparent sky brightness modifier"|"天空亮度乘数（仅显示）"
+"Modifies the apparent brightness of the sky."|"修改天空的表观亮度，不对地面产生影响。"
+"Allow blocks to emit light based on their material settings."|"允许基于材质设置的方块发光。"
+"Emitter intensity"|"发射器（光源）强度"
+"Modifies the intensity of emitter light."|"修改发射器发出的光的强度。"
+"Reload chunks"|"重载区块"
+"Chunk reload required"|"需要重载区块"
+"Determine how emitters are sampled at each bounce."|"决定每次反射时如何对发射器进行采样。"
+"Draws the sun texture on top of the skymap."|"在skymap上绘制太阳材质。"
+"Importance sample chance"|"重要性采样概率"
+"Probability of sampling the sun on each importance bounce"|"在每次重要性反射中采样太阳的概率。"
+"Importance sample radius"|"重要性采样半径"
+"Radius of possible sun sampling bounces (relative to the sun's radius)"|"太阳可能采样反射半径（相对于太阳的半径）。"
+"Sunlight intensity"|"阳光强度（FAST）"
+"Changes the intensity of sunlight. Only used when Sun Sampling Strategy is set to FAST or HIGH_QUALITY."|"改变阳光的强度。仅在太阳采样策略设置为FAST或HIGH_QUALITY时使用。"
+"Sun luminosity"|"阳光强度（OFF）"
+"Changes the absolute brightness of the sun. Only used when Sun Sampling Strategy is set to OFF or HIGH_QUALITY."|"改变太阳的绝对亮度。仅在太阳采样策略设置为OFF或HIGH_QUALITY时使用。"
+"Apparent sun brightness"|"太阳表观亮度（仅显示）"
+"Changes the apparent brightness of the sun texture."|"改变太阳材质的表观亮度。"
+"Sun size"|"太阳大小"
+"Sun radius in degrees."|"太阳半径（以度为单位）。"
+"Changes whether the the color of the sun texture is modified by the apparent sun color."|"控制太阳材质的颜色是否受太阳表观颜色的影响。"
+"Sun azimuth"|"太阳方位角"
+"Changes the horizontal direction of the sun from a reference direction of East."|"改变太阳相对于以东部作为参考方向时的水平方向。"
+"Sun altitude"|"太阳高度"
+"Changes the vertical direction of the sun from a reference altitude of the horizon."|"改变太阳相对于以地平线作为参考高度时的垂直方向。"
+
+<./chunky/src/java/se/llbit/chunky/ui/render/tabs/PostprocessingTab.java>
+"Exposure"|"曝光值"
+"Linear exposure of the image."|"图像的线性曝光。"
+
+<./chunky/src/java/se/llbit/chunky/ui/render/tabs/GeneralTab.java>
+"Export settings as a JSON string."|"将设置导出为JSON字符串。"
+"Settings Import"|"设置导入"
+"Import scene settings"|"导入场景设置"
+"Settings JSON:"|"设置JSON："
+"Failed to import scene settings."|"导入场景设置失败。"
+"Failed to import settings: syntax error in JSON string (%s)."|"导入设置失败：JSON字符串中存在语法错误（%s）。"
+"Restore default settings"|"恢复默认设置"
+"Do you really want to reset all scene settings?"|"您真的要重置所有场景设置吗？"
+"This takes effect the next time a new scene is created."|"这将在下次创建新场景时生效。"
+"Save render progress every time a multiple of the specified number of SPP has been reached."|"每当达到指定的SPP的倍数时保存渲染进度。"
+"Blocks below this Y value are not loaded. Requires reloading chunks to take effect."|"低于此Y值的方块不会加载。需要重载区块才能生效。"
+"Reload the chunks for this to take effect."|"重载区块以使其生效。"
+"Blocks above this Y value are not loaded. Requires reloading chunks to take effect."|"高于此Y值的方块不会加载。需要重载区块才能生效。"
+"Open the directory where Chunky stores the scene description and renders of this scene."|"打开Chunky存储此场景描述和渲染的目录。"
+"Load the chunks that are currently selected in the map view"|"加载当前在地图视图中选择的区块"
+"Reload all chunks in the scene."|"重载场景中的所有区块。"
+"Open the directory of the scene, if it has been saved."|"如果场景已保存，打开其目录。"
+"Reload the currently-loaded chunks."|"重载当前加载的区块。"
+"Load chunks selected in the map view."|"加载在地图视图中选择的区块。"
+"Load the chunks that are currently selected in the map view"|"加载当前在地图视图中选择的区块"
+"Flip image to landscape format"|"将图像翻转为横向格式"
+"Flip image to portrait format"|"将图像翻转为纵向格式"
+"Scale the canvas size by "|"按比例缩放图片尺寸"
+"Apply the new size to the render canvas."|"将新尺寸应用于图片。"
+"Make the current canvas size the default."|"将当前图片尺寸设为默认。"
+"Takes effect on next scene creation."|"将在下次加载场景时生效。"
+"Enable/disable player entity loading. "|"启用/禁用玩家实体加载。"
+"Enable/disable armor stand entity loading. "|"启用/禁用盔甲架实体加载。"
+"Enable/disable book entity loading. "|"启用/禁用书本实体加载。"
+"Enable/disable painting entity loading. "|"启用/禁用画实体加载。"
+"Enable/disable beacon beam entity loading. "|"启用/禁用信标光束实体加载。"
+"Enable/disable other entity loading. "|"启用/禁用其他实体加载。"
