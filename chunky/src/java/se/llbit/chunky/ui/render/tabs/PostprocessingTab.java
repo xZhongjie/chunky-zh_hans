@@ -145,8 +145,8 @@ public class PostprocessingTab extends ScrollPane implements RenderControlsTab, 
         return PostProcessingFilters.getPostProcessingFilterFromName(string).orElse(Scene.DEFAULT_POSTPROCESSING_FILTER);
       }
     });
-    exposure.setName("Exposure");
-    exposure.setTooltip("Linear exposure of the image.");
+    exposure.setName("曝光值");
+    exposure.setTooltip("图像的线性曝光。");
     exposure.setRange(Scene.MIN_EXPOSURE, Scene.MAX_EXPOSURE);
     exposure.makeLogarithmic();
     exposure.clampMin();

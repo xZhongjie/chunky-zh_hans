@@ -82,33 +82,33 @@ public class LightingTab extends ScrollPane implements RenderControlsTab, Initia
   }
 
   @Override public void initialize(URL location, ResourceBundle resources) {
-    skyExposure.setName("Sky exposure");
-    skyExposure.setTooltip("Changes the exposure of the sky.");
+    skyExposure.setName("天空曝光");
+    skyExposure.setTooltip("改变天空的曝光度。");
     skyExposure.setRange(Sky.MIN_INTENSITY, Sky.MAX_INTENSITY);
     skyExposure.makeLogarithmic();
     skyExposure.clampMin();
     skyExposure.onValueChange(value -> scene.sky().setSkyExposure(value));
 
-    skyIntensity.setName("Sky light intensity modifier");
-    skyIntensity.setTooltip("Modifies the intensity of the light emitted by the sky.");
+    skyIntensity.setName("天空亮度（影响环境光照）");
+    skyIntensity.setTooltip("修改天空发出的光的强度，影响地面。");
     skyIntensity.setRange(Sky.MIN_INTENSITY, Sky.MAX_INTENSITY);
     skyIntensity.makeLogarithmic();
     skyIntensity.clampMin();
     skyIntensity.onValueChange(value -> scene.sky().setSkyLight(value));
 
-    apparentSkyBrightness.setName("Apparent sky brightness modifier");
-    apparentSkyBrightness.setTooltip("Modifies the apparent brightness of the sky.");
+    apparentSkyBrightness.setName("天空亮度乘数（仅显示）");
+    apparentSkyBrightness.setTooltip("修改天空的表观亮度，不对地面产生影响。");
     apparentSkyBrightness.setRange(Sky.MIN_APPARENT_INTENSITY, Sky.MAX_APPARENT_INTENSITY);
     apparentSkyBrightness.makeLogarithmic();
     apparentSkyBrightness.clampMin();
     apparentSkyBrightness.onValueChange(value -> scene.sky().setApparentSkyLight(value));
 
-    enableEmitters.setTooltip(new Tooltip("Allow blocks to emit light based on their material settings."));
+    enableEmitters.setTooltip(new Tooltip("允许基于材质设置的方块发光。"));
     enableEmitters.selectedProperty().addListener(
       (observable, oldValue, newValue) -> scene.setEmittersEnabled(newValue));
 
-    emitterIntensity.setName("Emitter intensity");
-    emitterIntensity.setTooltip("Modifies the intensity of emitter light.");
+    emitterIntensity.setName("发射器（光源）强度");
+    emitterIntensity.setTooltip("修改发射器发出的光的强度。");
     emitterIntensity.setRange(Scene.MIN_EMITTER_INTENSITY, Scene.MAX_EMITTER_INTENSITY);
     emitterIntensity.makeLogarithmic();
     emitterIntensity.clampMin();
@@ -123,18 +123,18 @@ public class LightingTab extends ScrollPane implements RenderControlsTab, Initia
           warning.setContentText("The selected chunks need to be reloaded in order for emitter sampling to work.");
           warning.getButtonTypes().setAll(
             ButtonType.CANCEL,
-            new ButtonType("Reload chunks", ButtonData.FINISH));
-          warning.setTitle("Chunk reload required");
+            new ButtonType("重载区块", ButtonData.FINISH));
+          warning.setTitle("需要重载区块");
           ButtonType result = warning.showAndWait().orElse(ButtonType.CANCEL);
           if (result.getButtonData() == ButtonData.FINISH) {
             controller.getRenderController().getSceneManager().reloadChunks();
           }
         }
       });
-    emitterSamplingStrategy.setTooltip(new Tooltip("Determine how emitters are sampled at each bounce."));
+    emitterSamplingStrategy.setTooltip(new Tooltip("决定每次反射时如何对发射器进行采样。"));
 
     drawSun.selectedProperty().addListener((observable, oldValue, newValue) -> scene.sun().setDrawTexture(newValue));
-    drawSun.setTooltip(new Tooltip("Draws the sun texture on top of the skymap."));
+    drawSun.setTooltip(new Tooltip("在skymap上绘制太阳材质。"));
 
     for (SunSamplingStrategy strategy : SunSamplingStrategy.values()) {
       if (strategy.getDeprecationStatus() != Registerable.DeprecationStatus.HIDDEN) {
@@ -157,47 +157,47 @@ public class LightingTab extends ScrollPane implements RenderControlsTab, Initia
     importanceSamplingDetailsPane.setExpanded(visible);
     importanceSamplingDetailsPane.setManaged(visible);
 
-    importanceSampleChance.setName("Importance sample chance");
-    importanceSampleChance.setTooltip("Probability of sampling the sun on each importance bounce");
+    importanceSampleChance.setName("重要性采样概率");
+    importanceSampleChance.setTooltip("在每次重要性反射中采样太阳的概率。");
     importanceSampleChance.setRange(Sun.MIN_IMPORTANCE_SAMPLE_CHANCE, Sun.MAX_IMPORTANCE_SAMPLE_CHANCE);
     importanceSampleChance.clampBoth();
     importanceSampleChance.onValueChange(value -> scene.sun().setImportanceSampleChance(value));
 
-    importanceSampleRadius.setName("Importance sample radius");
-    importanceSampleRadius.setTooltip("Radius of possible sun sampling bounces (relative to the sun's radius)");
+    importanceSampleRadius.setName("重要性采样半径");
+    importanceSampleRadius.setTooltip("太阳可能采样反射半径（相对于太阳的半径）。");
     importanceSampleRadius.setRange(Sun.MIN_IMPORTANCE_SAMPLE_RADIUS, Sun.MAX_IMPORTANCE_SAMPLE_RADIUS);
     importanceSampleRadius.clampMin();
     importanceSampleRadius.onValueChange(value -> scene.sun().setImportanceSampleRadius(value));
 
-    sunIntensity.setName("Sunlight intensity");
-    sunIntensity.setTooltip("Changes the intensity of sunlight. Only used when Sun Sampling Strategy is set to FAST or HIGH_QUALITY.");
+    sunIntensity.setName("阳光强度（FAST）");
+    sunIntensity.setTooltip("改变阳光的强度。仅在太阳采样策略设置为FAST或HIGH_QUALITY时使用。");
     sunIntensity.setRange(Sun.MIN_INTENSITY, Sun.MAX_INTENSITY);
     sunIntensity.makeLogarithmic();
     sunIntensity.clampMin();
     sunIntensity.onValueChange(value -> scene.sun().setIntensity(value));
 
-    sunLuminosity.setName("Sun luminosity");
-    sunLuminosity.setTooltip("Changes the absolute brightness of the sun. Only used when Sun Sampling Strategy is set to OFF or HIGH_QUALITY.");    sunLuminosity.setRange(1, 10000);
+    sunLuminosity.setName("阳光强度（OFF）");
+    sunLuminosity.setTooltip("改变太阳的绝对亮度。仅在太阳采样策略设置为OFF或HIGH_QUALITY时使用。");    sunLuminosity.setRange(1, 10000);
     sunLuminosity.makeLogarithmic();
     sunLuminosity.clampMin();
     sunLuminosity.onValueChange(value -> scene.sun().setLuminosity(value));
 
-    apparentSunBrightness.setName("Apparent sun brightness");
-    apparentSunBrightness.setTooltip("Changes the apparent brightness of the sun texture.");
+    apparentSunBrightness.setName("太阳表观亮度（仅显示）");
+    apparentSunBrightness.setTooltip("改变太阳材质的表观亮度。");
     apparentSunBrightness.setRange(Sun.MIN_APPARENT_BRIGHTNESS, Sun.MAX_APPARENT_BRIGHTNESS);
     apparentSunBrightness.makeLogarithmic();
     apparentSunBrightness.clampMin();
     apparentSunBrightness.onValueChange(value -> scene.sun().setApparentBrightness(value));
 
-    sunRadius.setName("Sun size");
-    sunRadius.setTooltip("Sun radius in degrees.");
+    sunRadius.setName("太阳大小");
+    sunRadius.setTooltip("太阳半径（以度为单位）。");
     sunRadius.setRange(0.01, 20);
     sunRadius.clampMin();
     sunRadius.onValueChange(value -> scene.sun().setSunRadius(Math.toRadians(value)));
 
     sunColor.colorProperty().addListener(sunColorListener);
 
-    modifySunTexture.setTooltip(new Tooltip("Changes whether the the color of the sun texture is modified by the apparent sun color."));
+    modifySunTexture.setTooltip(new Tooltip("控制太阳材质的颜色是否受太阳表观颜色的影响。"));
     modifySunTexture.selectedProperty().addListener((observable, oldValue, newValue) -> {
       scene.sun().setEnableTextureModification(newValue);
       apparentSunColor.setDisable(!newValue);
@@ -206,12 +206,12 @@ public class LightingTab extends ScrollPane implements RenderControlsTab, Initia
     apparentSunColor.setDisable(true);
     apparentSunColor.colorProperty().addListener(apparentSunColorListener);
 
-    sunAzimuth.setName("Sun azimuth");
-    sunAzimuth.setTooltip("Changes the horizontal direction of the sun from a reference direction of East.");
+    sunAzimuth.setName("太阳方位角");
+    sunAzimuth.setTooltip("改变太阳相对于以东部作为参考方向时的水平方向。");
     sunAzimuth.onValueChange(value -> scene.sun().setAzimuth(-QuickMath.degToRad(value)));
 
-    sunAltitude.setName("Sun altitude");
-    sunAltitude.setTooltip("Changes the vertical direction of the sun from a reference altitude of the horizon.");
+    sunAltitude.setName("太阳高度");
+    sunAltitude.setTooltip("改变太阳相对于以地平线作为参考高度时的垂直方向。");
     sunAltitude.onValueChange(value -> scene.sun().setAltitude(QuickMath.degToRad(value)));
   }
 

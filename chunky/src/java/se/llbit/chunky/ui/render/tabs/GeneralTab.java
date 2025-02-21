@@ -147,9 +147,9 @@ public class GeneralTab extends ScrollPane implements RenderControlsTab, Initial
     }
 
     saveSnapshots.setSelected(scene.shouldSaveSnapshots());
-    reloadChunks.setTooltip(new Tooltip("Reload the currently-loaded chunks."));
+    reloadChunks.setTooltip(new Tooltip("重载当前加载的区块。"));
     reloadChunks.setDisable(scene.numberOfChunks() == 0);
-    loadSelectedChunks.setTooltip(new Tooltip("Load chunks selected in the map view."));
+    loadSelectedChunks.setTooltip(new Tooltip("加载在地图视图中选择的区块。"));
     loadSelectedChunks.setDisable(
       mapLoader.getWorld() instanceof EmptyWorld ||
       mapLoader.getWorld() == null ||
@@ -163,7 +163,7 @@ public class GeneralTab extends ScrollPane implements RenderControlsTab, Initial
       );
     });
     openSceneDirBtn.setDisable(!controller.getContext().getSceneDirectory().exists());
-    openSceneDirBtn.setTooltip(new Tooltip("Open the directory of the scene, if it has been saved."));
+    openSceneDirBtn.setTooltip(new Tooltip("如果场景已保存，打开其目录。"));
     ((AsynchronousSceneManager) controller.getSceneManager()).setOnSceneSaved(() -> {
       openSceneDirBtn.setDisable(!controller.getContext().getSceneDirectory().exists());
     });
@@ -198,7 +198,7 @@ public class GeneralTab extends ScrollPane implements RenderControlsTab, Initial
   @Override public void initialize(URL location, ResourceBundle resources) {
     // TODO: parentTab.setGraphic(new ImageView(Icon.wrench.fxImage()));
 
-    exportSettings.setTooltip(new Tooltip("Export settings as a JSON string."));
+    exportSettings.setTooltip(new Tooltip("将设置导出为JSON字符串。"));
     exportSettings.setOnAction(event -> {
       SettingsExport dialog = new SettingsExport(scene.toJson());
       dialog.show();
@@ -207,9 +207,9 @@ public class GeneralTab extends ScrollPane implements RenderControlsTab, Initial
     importSettings.setTooltip(new Tooltip("Import settings from a JSON string."));
     importSettings.setOnAction(event -> {
       TextInputDialog dialog = new TextInputDialog();
-      dialog.setTitle("Settings Import");
-      dialog.setHeaderText("Import scene settings");
-      dialog.setContentText("Settings JSON:");
+      dialog.setTitle("设置导入");
+      dialog.setHeaderText("导入场景设置");
+      dialog.setContentText("设置JSON：");
       Optional<String> result = dialog.showAndWait();
       if (result.isPresent()) {
         String text = result.get();
@@ -219,9 +219,9 @@ public class GeneralTab extends ScrollPane implements RenderControlsTab, Initial
           renderControls.getCanvas().setCanvasSize(scene.canvasConfig.getWidth(), scene.canvasConfig.getHeight());
           renderControls.refreshSettings();
         } catch (IOException e) {
-          Log.warn("Failed to import scene settings.");
+          Log.warn("导入场景设置失败。");
         } catch (JsonParser.SyntaxError syntaxError) {
-          Log.warnf("Failed to import settings: syntax error in JSON string (%s).",
+          Log.warnf("导入设置失败：JSON字符串中存在语法错误（%s）。",
               syntaxError.getMessage());
         }
       }
@@ -230,8 +230,8 @@ public class GeneralTab extends ScrollPane implements RenderControlsTab, Initial
     restoreDefaults.setOnAction(
         event -> {
           Alert alert = Dialogs.createAlert(AlertType.CONFIRMATION);
-          alert.setTitle("Restore default settings");
-          alert.setContentText("Do you really want to reset all scene settings?");
+          alert.setTitle("恢复默认设置");
+          alert.setContentText("您真的要重置所有场景设置吗？");
           alert.showAndWait().ifPresent(result -> {
             if (result == ButtonType.OK) {
               scene.resetScene(scene.name, controller.getContext().getChunky().getSceneFactory());
@@ -240,65 +240,65 @@ public class GeneralTab extends ScrollPane implements RenderControlsTab, Initial
           });
         });
 
-    loadPlayers.setTooltip(new Tooltip("Enable/disable player entity loading. "
-        + "Takes effect on next scene creation."));
+    loadPlayers.setTooltip(new Tooltip("启用/禁用玩家实体加载。"
+        + "将在下次加载场景时生效。"));
     loadPlayers.selectedProperty().addListener((observable, oldValue, newValue) -> {
       scene.getEntityLoadingPreferences().setPreference(PlayerEntity.class, newValue);
       PersistentSettings.setLoadPlayers(newValue);
     });
     loadPlayers.setOnAction(event -> {
       renderControls.showPopup(
-              "This takes effect the next time a new scene is created.", loadPlayers);
+              "这将在下次创建新场景时生效。", loadPlayers);
     });
-    loadArmorStands.setTooltip(new Tooltip("Enable/disable armor stand entity loading. "
-            + "Takes effect on next scene creation."));
+    loadArmorStands.setTooltip(new Tooltip("启用/禁用盔甲架实体加载。"
+            + "将在下次加载场景时生效。"));
     loadArmorStands.selectedProperty().addListener((observable, oldValue, newValue) -> {
       scene.getEntityLoadingPreferences().setPreference(ArmorStand.class, newValue);
       PersistentSettings.setLoadArmorStands(newValue);
     });
     loadArmorStands.setOnAction(event -> {
       renderControls.showPopup(
-              "This takes effect the next time a new scene is created.", loadArmorStands);
+              "这将在下次创建新场景时生效。", loadArmorStands);
     });
-    loadBooks.setTooltip(new Tooltip("Enable/disable book entity loading. "
-            + "Takes effect on next scene creation."));
+    loadBooks.setTooltip(new Tooltip("启用/禁用书本实体加载。"
+            + "将在下次加载场景时生效。"));
     loadBooks.selectedProperty().addListener((observable, oldValue, newValue) -> {
       scene.getEntityLoadingPreferences().setPreference(Book.class, newValue);
       PersistentSettings.setLoadBooks(newValue);
     });
     loadBooks.setOnAction(event -> {
       renderControls.showPopup(
-              "This takes effect the next time a new scene is created.", loadBooks);
+              "这将在下次创建新场景时生效。", loadBooks);
     });
-    loadPaintings.setTooltip(new Tooltip("Enable/disable painting entity loading. "
-            + "Takes effect on next scene creation."));
+    loadPaintings.setTooltip(new Tooltip("启用/禁用画实体加载。"
+            + "将在下次加载场景时生效。"));
     loadPaintings.selectedProperty().addListener((observable, oldValue, newValue) -> {
       scene.getEntityLoadingPreferences().setPreference(PaintingEntity.class, newValue);
       PersistentSettings.setLoadPaintings(newValue);
     });
     loadPaintings.setOnAction(event -> {
       renderControls.showPopup(
-              "This takes effect the next time a new scene is created.", loadPaintings);
+              "这将在下次创建新场景时生效。", loadPaintings);
     });
-    loadBeaconBeams.setTooltip(new Tooltip("Enable/disable beacon beam entity loading. "
-      + "Takes effect on next scene creation."));
+    loadBeaconBeams.setTooltip(new Tooltip("启用/禁用信标光束实体加载。"
+      + "将在下次加载场景时生效。"));
     loadBeaconBeams.selectedProperty().addListener((observable, oldValue, newValue) -> {
       scene.getEntityLoadingPreferences().setPreference(BeaconBeam.class, newValue);
       PersistentSettings.setLoadBeaconBeams(newValue);
     });
     loadBeaconBeams.setOnAction(event -> {
       renderControls.showPopup(
-        "This takes effect the next time a new scene is created.", loadBeaconBeams);
+        "这将在下次创建新场景时生效。", loadBeaconBeams);
     });
-    loadOtherEntities.setTooltip(new Tooltip("Enable/disable other entity loading. "
-            + "Takes effect on next scene creation."));
+    loadOtherEntities.setTooltip(new Tooltip("启用/禁用其他实体加载。"
+            + "将在下次加载场景时生效。"));
     loadOtherEntities.selectedProperty().addListener((observable, oldValue, newValue) -> {
       scene.getEntityLoadingPreferences().setPreference(null, newValue);
       PersistentSettings.setLoadOtherEntities(newValue);
     });
     loadOtherEntities.setOnAction(event -> {
       renderControls.showPopup(
-              "This takes effect the next time a new scene is created.", loadOtherEntities);
+              "这将在下次创建新场景时生效。", loadOtherEntities);
     });
     loadAllEntities.setOnAction(event -> {
       loadPlayers.setSelected(true);
@@ -333,7 +333,7 @@ public class GeneralTab extends ScrollPane implements RenderControlsTab, Initial
     dumpSettings.expandedProperty().set(saveDumps.isSelected());
     dumpSettings.managedProperty().set(saveDumps.isSelected());
 
-    saveDumps.setTooltip(new Tooltip("Save render progress every time a multiple of the specified number of SPP has been reached."));
+    saveDumps.setTooltip(new Tooltip("每当达到指定的SPP的倍数时保存渲染进度。"));
     saveDumps.selectedProperty().addListener((observable, oldValue, enable) -> {
       dumpFrequency.setDisable(!enable);
       if (enable) {
@@ -354,7 +354,7 @@ public class GeneralTab extends ScrollPane implements RenderControlsTab, Initial
     });
 
     yMin.setTooltip(
-        "Blocks below this Y value are not loaded. Requires reloading chunks to take effect.");
+        "低于此Y值的方块不会加载。需要重载区块才能生效。");
     yMin.onValueChange(value -> {
       if (value >= yMax.get()) {
         yMin.setInvalid(true);
@@ -365,12 +365,12 @@ public class GeneralTab extends ScrollPane implements RenderControlsTab, Initial
         yMax.setInvalid(false);
 
         scene.setYClipMin(value);
-        renderControls.showPopup("Reload the chunks for this to take effect.", yMax);
+        renderControls.showPopup("重载区块以使其生效。", yMax);
       }
     });
 
     yMax.setTooltip(
-      "Blocks above this Y value are not loaded. Requires reloading chunks to take effect.");
+      "高于此Y值的方块不会加载。需要重载区块才能生效。");
     yMax.onValueChange(value -> {
       if (yMin.get() >= value) {
         yMin.setInvalid(true);
@@ -381,7 +381,7 @@ public class GeneralTab extends ScrollPane implements RenderControlsTab, Initial
         yMax.setInvalid(false);
 
         scene.setYClipMax(value);
-        renderControls.showPopup("Reload the chunks for this to take effect.", yMax);
+        renderControls.showPopup("重载区块以使其生效。", yMax);
       }
     });
 
@@ -389,18 +389,18 @@ public class GeneralTab extends ScrollPane implements RenderControlsTab, Initial
     yClipInvalid.managedProperty().bind(yClipInvalid.visibleProperty());
 
     openSceneDirBtn.setTooltip(
-        new Tooltip("Open the directory where Chunky stores the scene description and renders of this scene."));
+        new Tooltip("打开Chunky存储此场景描述和渲染的目录。"));
     openSceneDirBtn.setOnAction(e -> chunkyFxController.openDirectory(chunkyFxController.getRenderController().getContext().getSceneDirectory()));
 
     loadSelectedChunks
-        .setTooltip(new Tooltip("Load the chunks that are currently selected in the map view"));
+        .setTooltip(new Tooltip("加载当前在地图视图中选择的区块"));
     loadSelectedChunks.setOnAction(e -> {
       controller.getSceneManager()
           .loadChunks(mapLoader.getWorld(), chunkyFxController.getChunkSelection().getSelection());
       reloadChunks.setDisable(chunkyFxController.getChunkSelection().isEmpty());
     });
 
-    reloadChunks.setTooltip(new Tooltip("Reload all chunks in the scene."));
+    reloadChunks.setTooltip(new Tooltip("重载场景中的所有区块。"));
     reloadChunks.setGraphic(new ImageView(Icon.reload.fxImage()));
     reloadChunks.setOnAction(e -> controller.getSceneManager().reloadChunks());
 
@@ -424,8 +424,8 @@ public class GeneralTab extends ScrollPane implements RenderControlsTab, Initial
     Tooltip flipAxesTooltip = new Tooltip();
     flipAxesTooltip.textProperty().bind(
       Bindings.when(canvasSizeInput.isPortraitRatioProperty())
-        .then("Flip image to landscape format")
-        .otherwise("Flip image to portrait format")
+        .then("将图像翻转为横向格式")
+        .otherwise("将图像翻转为纵向格式")
     );
     flipAxesBtn.setTooltip(flipAxesTooltip);
     flipAxesBtn.setOnAction(e -> canvasSizeInput.swapAxes());
@@ -433,13 +433,13 @@ public class GeneralTab extends ScrollPane implements RenderControlsTab, Initial
     for(Double scale : scaleButtonValues) {
       Button scaleButton = new Button("×" + scale.toString());
       scaleButton.setMnemonicParsing(false);
-      scaleButton.setTooltip(new Tooltip("Scale the canvas size by " + scale));
+      scaleButton.setTooltip(new Tooltip("按比例缩放图片尺寸" + scale));
       scaleButton.setOnAction(e -> canvasSizeInput.scaleSize(scale));
       scaleButtonArea.getChildren().add(scaleButton);
     }
-    applySize.setTooltip(new Tooltip("Apply the new size to the render canvas."));
+    applySize.setTooltip(new Tooltip("将新尺寸应用于图片。"));
     applySize.setOnAction(e -> canvasSizeInput.applyChanges());
-    makeDefaultSize.setTooltip(new Tooltip("Make the current canvas size the default."));
+    makeDefaultSize.setTooltip(new Tooltip("将当前图片尺寸设为默认。"));
     makeDefaultSize.setOnAction(e -> PersistentSettings
       .set3DCanvasSize(scene.canvasConfig.getWidth(), scene.canvasConfig.getHeight()));
 
