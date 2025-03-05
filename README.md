@@ -4,7 +4,8 @@
 <h1 align="center">Chunky</h1>
 <div align="center">
 
-Chunky is a Minecraft rendering tool that uses Path Tracing to create realistic images of your Minecraft worlds. Webhook测试
+喵~这里是原项目的汉化版本哦 (>ω<)
+✨Chunky 是用光线追踪技术渲染Minecraft世界的工具，能生成超逼真的图片喵！
 
 [Discord server][chunky-discord] ·
 [Documentation][chunky-dev] ·
