@@ -21,8 +21,8 @@ def load_replacements_from_header(header_path):
                           f"\n  绝对路径：{current_file}")
                     file_specific_replacements[current_file] = {}
                     
-                elif current_file and '|' in stripped_line:
-                    original, translation = stripped_line.split('|', 1)
+                elif current_file and '=' in stripped_line:
+                    original, translation = stripped_line.split('=', 1)
                     original = original.strip()
                     translation = translation.strip()
                     print(f"[调试] 第{line_number}行添加规则："
