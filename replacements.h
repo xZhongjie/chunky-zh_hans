@@ -29,3 +29,13 @@
 "Changes the horizontal direction of the sun from a reference direction of East."="改变太阳相对于以东部作为参考方向时的水平方向。"
 "Sun altitude"="太阳高度"
 "Changes the vertical direction of the sun from a reference altitude of the horizon."="改变太阳相对于以地平线作为参考高度时的垂直方向。"
+<./chunky/src/java/se/llbit/chunky/ui/render/tabs/LightingTab.java>
+"Load a camera preset. Overwrites current camera settings."="加载摄像机预设。覆写当前的摄像机设置。"
+"Create a copy of the current camera."="创建一个当前摄像机的副本。"
+"Delete the current camera."="删除当前摄像机。"
+"Field of view (zoom)"="视场角（FOV/缩放）"
+"Depth of field"="景深（DOF）"
+"Subject distance"="主体距离"
+"Distance to focal plane."="到焦平面的距离。"
+"Focuses on the object that is the set target."="对焦到准星所对的目标。"
+"Change the shape of the aperture of the virtual camera."="改变摄像机的光圈遮罩。"
